@@ -15,19 +15,51 @@
             color: #fff;
             display: flex;
             flex-direction: column;
-            overflow: hidden; /* Para que la imagen de fondo sea fija */
+            overflow: hidden;
         }
 
-        /* Fondo dinámico (reutilizando el estilo que pusimos en el sistema) */
+        /* Fondo dinámico */
         .background {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url('https://images.unsplash.com/photo-1599672073106-4903328f5261?q=80&w=2560'); /* Un fondo abstracto y elegante */
+            background-image: url('https://images.unsplash.com/photo-1599672073106-4903328f5261?q=80&w=2560');
             background-size: cover;
             background-position: center;
             filter: blur(5px) brightness(0.7);
             z-index: -1;
-            transform: scale(1.1); /* Evitar bordes blancos por el blur */
+            transform: scale(1.1);
+        }
+
+        /* Selector de Idioma (Arriba a la derecha) */
+        .header {
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: flex-end;
+            position: absolute;
+            top: 0;
+            z-index: 10;
+        }
+
+        .lang-select {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            outline: none;
+            cursor: pointer;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        .lang-select option {
+            background: #222;
+            color: #fff;
         }
 
         /* Contenedor principal */
@@ -39,12 +71,11 @@
             align-items: center;
             text-align: center;
             padding: 20px;
+            margin-top: 40px;
         }
 
         /* Logo y Título */
-        .logo-area {
-            margin-bottom: 30px;
-        }
+        .logo-area { margin-bottom: 30px; }
 
         .os-title {
             font-size: 4rem;
@@ -62,7 +93,7 @@
             margin-top: 5px;
         }
 
-        /* Botón de Descarga Principal */
+        /* Botón de Descarga */
         .download-btn {
             background-color: #fff;
             color: #000;
@@ -80,7 +111,7 @@
             box-shadow: 0 6px 20px rgba(255,255,255,0.5);
         }
 
-        /* === NUEVA SECCIÓN: Comunidad (Glassmorphism) === */
+        /* Sección Comunidad */
         .community-section {
             margin-top: 60px;
             background: rgba(255, 255, 255, 0.1);
@@ -98,17 +129,15 @@
             font-weight: 600;
             margin-top: 0;
             margin-bottom: 20px;
-            color: #fff;
         }
 
         .links-container {
             display: flex;
             justify-content: center;
             gap: 15px;
-            flex-wrap: wrap; /* Para móviles */
+            flex-wrap: wrap;
         }
 
-        /* Estilo de los enlaces como botones secundarios */
         .github-link {
             display: inline-flex;
             align-items: center;
@@ -128,57 +157,99 @@
             border-color: rgba(255,255,255,0.3);
         }
 
-        /* Icono de GitHub (usando un simple SVG) */
-        .gh-icon {
-            width: 16px;
-            height: 16px;
-            margin-right: 8px;
-            fill: currentColor;
-        }
+        .gh-icon { width: 16px; height: 16px; margin-right: 8px; fill: currentColor; }
 
-        /* Footer minimalista */
-        footer {
-            padding: 20px;
-            font-size: 0.8rem;
-            color: rgba(255,255,255,0.4);
-            text-align: center;
-        }
+        footer { padding: 20px; font-size: 0.8rem; color: rgba(255,255,255,0.4); text-align: center; }
     </style>
 </head>
 <body>
     <div class="background"></div>
 
+    <div class="header">
+        <select id="langSelector" class="lang-select" onchange="changeLanguage(this.value)">
+            <option value="es">🇪🇸 Español</option>
+            <option value="en">🇬🇧 English</option>
+        </select>
+    </div>
+
     <div class="main-container">
         <div class="logo-area">
             <h1 class="os-title">ErikOS 14</h1>
-            <div class="os-version">Versión Golden Master</div>
+            <div class="os-version" id="text-version">Versión Golden Master</div>
         </div>
 
-        <a href="https://www.icloud.com/iclouddrive/0035q_tOW9pb5XdnNahZlMZ1A#ErikOS14" class="download-btn">Descargar erikos14.iso</a>
+        <a href="#" class="download-btn" id="text-download">Descargar erikos14.iso</a>
 
         <div class="community-section">
-            <h2 class="community-title">Únete a la Comunidad</h2>
+            <h2 class="community-title" id="text-community">Únete a la Comunidad</h2>
             <div class="links-container">
                 <a href="https://github.com/erik-os" class="github-link" target="_blank">
                     <svg class="gh-icon" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.03 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
-                    GitHub Oficial
+                    <span id="text-gh-official">GitHub Oficial</span>
                 </a>
                 
                 <a href="https://github.com/erik-os/erik-os/discussions" class="github-link" target="_blank">
                     <svg class="gh-icon" viewBox="0 0 16 16"><path d="M1.75 1h12.5c.966 0 1.75.784 1.75 1.75v9.5A1.75 1.75 0 0114.25 14H1.75A1.75 1.75 0 010 12.25v-9.5C0 1.784.784 1 1.75 1zM1.5 2.75v9.5c0 .138.112.25.25.25h12.5a.25.25 0 00.25-.25v-9.5a.25.25 0 00-.25-.25H1.75a.25.25 0 00-.25.25z"></path><path d="M11 5H5v1h6V5zm0 3H5v1h6V8z"></path></svg>
-                    Discusiones y Votos
+                    <span id="text-gh-disc">Discusiones y Votos</span>
                 </a>
 
                 <a href="https://github.com/erik-os/erik-os/wiki" class="github-link" target="_blank">
                     <svg class="gh-icon" viewBox="0 0 16 16"><path d="M3 0h10a2 2 0 012 2v12a2 2 0 01-2 2H3a2 2 0 01-2-2V2a2 2 0 012-2zm0 1a1 1 0 00-1 1v12a1 1 0 001 1h10a1 1 0 001-1V2a1 1 0 001-1H3z"></path><path d="M4 4h8v1H4V4zm0 3h8v1H4V7zm0 3h5v1H4v-1z"></path></svg>
-                    Wiki Técnica
+                    <span id="text-gh-wiki">Wiki Técnica</span>
                 </a>
             </div>
         </div>
     </div>
 
-    <footer>
+    <footer id="text-footer">
         Hecho con ❤️ por Erik. ErikOS es un proyecto de código abierto.
     </footer>
+
+    <script>
+        const translations = {
+            es: {
+                version: "Versión Golden Master",
+                download: "Descargar erikos14.iso",
+                community: "Únete a la Comunidad",
+                ghOfficial: "GitHub Oficial",
+                ghDisc: "Discusiones y Votos",
+                ghWiki: "Wiki Técnica",
+                footer: "Hecho con ❤️ por Erik. ErikOS es un proyecto de código abierto."
+            },
+            en: {
+                version: "Golden Master Version",
+                download: "Download erikos14.iso",
+                community: "Join the Community",
+                ghOfficial: "Official GitHub",
+                ghDisc: "Discussions & Voting",
+                ghWiki: "Technical Wiki",
+                footer: "Made with ❤️ by Erik. ErikOS is an open-source project."
+            }
+        };
+
+        function changeLanguage(lang) {
+            // Cambiar los textos usando los IDs
+            document.getElementById("text-version").innerText = translations[lang].version;
+            document.getElementById("text-download").innerText = translations[lang].download;
+            document.getElementById("text-community").innerText = translations[lang].community;
+            document.getElementById("text-gh-official").innerText = translations[lang].ghOfficial;
+            document.getElementById("text-gh-disc").innerText = translations[lang].ghDisc;
+            document.getElementById("text-gh-wiki").innerText = translations[lang].ghWiki;
+            document.getElementById("text-footer").innerText = translations[lang].footer;
+            
+            // Actualizar el selector y el idioma de la página
+            document.getElementById("langSelector").value = lang;
+            document.documentElement.lang = lang;
+        }
+
+        // Detectar el idioma automáticamente al entrar
+        window.onload = function() {
+            // navigator.language saca el idioma del navegador (ej: "es-ES" o "en-US")
+            let userLang = navigator.language.slice(0, 2); 
+            // Si el idioma es inglés u otro, ponemos inglés por defecto. Si es español, español.
+            let defaultLang = (userLang === 'es') ? 'es' : 'en';
+            changeLanguage(defaultLang);
+        };
+    </script>
 </body>
 </html>
