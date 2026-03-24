@@ -52,15 +52,10 @@
             font-size: 0.9rem;
             outline: none;
             cursor: pointer;
-            -webkit-appearance: none;
-            -moz-appearance: none;
             appearance: none;
         }
 
-        .lang-select option {
-            background: #222;
-            color: #fff;
-        }
+        .lang-select option { background: #222; color: #fff; }
 
         /* Contenedor principal */
         .main-container {
@@ -93,7 +88,7 @@
             margin-top: 5px;
         }
 
-        /* Botón de Descarga */
+        /* Botón de Descarga Principal */
         .download-btn {
             background-color: #fff;
             color: #000;
@@ -104,11 +99,33 @@
             text-decoration: none;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(255,255,255,0.3);
+            display: inline-block;
         }
 
         .download-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(255,255,255,0.5);
+        }
+
+        /* === NUEVO: Botón de Seguridad Secundario (Solo Inglés) === */
+        .security-action-btn {
+            display: inline-block;
+            margin-top: 15px; /* Espaciado debajo del botón de descarga */
+            background: rgba(255, 255, 255, 0.05);
+            color: rgba(255,255,255,0.7);
+            padding: 8px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.2s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .security-action-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border-color: rgba(255,255,255,0.2);
         }
 
         /* Sección Comunidad */
@@ -178,7 +195,11 @@
             <div class="os-version" id="text-version">Versión Golden Master</div>
         </div>
 
-        <a href="https://www.icloud.com/iclouddrive/0035q_tOW9pb5XdnNahZlMZ1A#ErikOS14" class="download-btn" id="text-download">Descargar erikos14.iso</a>
+        <a href="https://www.icloud.com/iclouddrive/0035q_tOW9pb5XdnNahZlMZ1A#ErikOS14" class="download-btn" id="text-download" target="_blank">Descargar erikos14.iso</a>
+
+        <a href="https://github.com/erik-os/erik-os/security/policy" class="security-action-btn" id="security-btn" target="_blank" style="display: none;">
+            Security Policy regarding updates
+        </a>
 
         <div class="community-section">
             <h2 class="community-title" id="text-community">Únete a la Comunidad</h2>
@@ -215,6 +236,7 @@
                 ghDisc: "Discusiones y Votos",
                 ghWiki: "Wiki Técnica",
                 footer: "Hecho con ❤️ por Erik. ErikOS es un proyecto de código abierto."
+                // No necesitamos texto de seguridad aquí porque el botón se oculta
             },
             en: {
                 version: "Golden Master Version",
@@ -224,11 +246,12 @@
                 ghDisc: "Discussions & Voting",
                 ghWiki: "Technical Wiki",
                 footer: "Made with ❤️ by Erik. ErikOS is an open-source project."
+                // El texto del botón de seguridad está directamente en el HTML
             }
         };
 
         function changeLanguage(lang) {
-            // Cambiar los textos usando los IDs
+            // Cambiar los textos estándar usando los IDs
             document.getElementById("text-version").innerText = translations[lang].version;
             document.getElementById("text-download").innerText = translations[lang].download;
             document.getElementById("text-community").innerText = translations[lang].community;
@@ -236,17 +259,23 @@
             document.getElementById("text-gh-disc").innerText = translations[lang].ghDisc;
             document.getElementById("text-gh-wiki").innerText = translations[lang].ghWiki;
             document.getElementById("text-footer").innerText = translations[lang].footer;
+
+            // === LÓGICA CLAVE: Mostrar/Ocultar botón de seguridad (Solo Inglés) ===
+            const securityBtn = document.getElementById('security-btn');
+            if (lang === 'en') {
+                securityBtn.style.display = 'inline-block'; // Mostrar si es Inglés
+            } else {
+                securityBtn.style.display = 'none'; // Ocultar si es Español u otro
+            }
             
-            // Actualizar el selector y el idioma de la página
+            // Actualizar el selector y el idioma del documento
             document.getElementById("langSelector").value = lang;
             document.documentElement.lang = lang;
         }
 
         // Detectar el idioma automáticamente al entrar
         window.onload = function() {
-            // navigator.language saca el idioma del navegador (ej: "es-ES" o "en-US")
             let userLang = navigator.language.slice(0, 2); 
-            // Si el idioma es inglés u otro, ponemos inglés por defecto. Si es español, español.
             let defaultLang = (userLang === 'es') ? 'es' : 'en';
             changeLanguage(defaultLang);
         };
