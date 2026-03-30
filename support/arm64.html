@@ -1,1 +1,70 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soporte ErikOS - Instalación ARM64</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 40px 20px; background-color: #f5f5f7; }
+        .container { background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        h1 { font-size: 32px; font-weight: 600; margin-bottom: 10px; color: #1d1d1f; }
+        h2 { font-size: 20px; font-weight: 600; margin-top: 30px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .badge { background: #e8f0fe; color: #1967d2; padding: 4px 12px; border-radius: 4px; font-size: 14px; font-weight: bold; }
+        .step { margin-bottom: 25px; }
+        .step-number { background: #0071e3; color: white; width: 24px; height: 24px; display: inline-block; text-align: center; border-radius: 50%; font-size: 14px; line-height: 24px; margin-right: 10px; }
+        .download-box { background: #f8f9fa; border: 1px solid #dadce0; padding: 20px; border-radius: 8px; margin: 20px 0; text-align: center; }
+        .btn-main { background: #0071e3; color: white; padding: 12px 24px; border-radius: 24px; text-decoration: none; font-weight: 500; display: inline-block; margin-top: 10px; }
+        .warning { background: #fff4e5; border-left: 5px solid #ffa117; padding: 15px; margin: 20px 0; font-size: 14px; }
+        code { background: #f1f1f1; padding: 2px 5px; border-radius: 4px; font-family: monospace; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <p><a href="/" style="color: #0066cc; text-decoration: none;">&larr; Volver a ErikHub</a></p>
+    <h1>Instalar ErikOS 14 Flex <span class="badge">ARM64</span></h1>
+    <p>Esta guía te ayudará a instalar ErikOS 14 Flex en tu Raspberry Pi utilizando la imagen de sistema oficial.</p>
+
+    <div class="download-box">
+        <p><strong>Imagen de sistema lista para descargar</strong></p>
+        <a href="#" class="btn-main">Descargar ErikOS_14_Flex.img (.zip)</a>
+        <p style="font-size: 12px; color: #666; margin-top: 10px;">Versión: 1.0 | Arquitectura: ARM64 (RPi 4/5)</p>
+    </div>
+
+    <h2>Requisitos previos</h2>
+    <ul>
+        <li>Tarjeta MicroSD (Mínimo 16GB, recomendado Clase 10).</li>
+        <li>Raspberry Pi 4 o Raspberry Pi 5.</li>
+        <li>Un ordenador con lector de tarjetas SD.</li>
+    </ul>
+
+    <h2>Instrucciones de instalación</h2>
+    
+    <div class="step">
+        <p><span class="step-number">1</span> <strong>Descarga la imagen:</strong> Haz clic en el botón superior para obtener el archivo <code>.zip</code> y descomprímelo para obtener el archivo <code>.img</code>.</p>
+    </div>
+
+    <div class="step">
+        <p><span class="step-number">2</span> <strong>Prepara el grabador:</strong> Recomendamos usar <a href="https://www.raspberrypi.com/software/" target="_blank" style="color: #0066cc;">Raspberry Pi Imager</a> o BalenaEtcher.</p>
+    </div>
+
+    <div class="step">
+        <p><span class="step-number">3</span> <strong>Graba la imagen:</strong> Abre el grabador, selecciona "Use Custom" (Elegir imagen propia) y selecciona tu archivo <code>ErikOS_14_Flex.img</code>. Selecciona tu tarjeta SD y pulsa en "Write".</p>
+    </div>
+
+    <div class="step">
+        <p><span class="step-number">4</span> <strong>Primer arranque:</strong> Introduce la SD en tu Raspberry Pi y enciéndela. El sistema iniciará automáticamente el escritorio.</p>
+    </div>
+
+    <div class="warning">
+        <strong>Nota importante:</strong> Al iniciar por primera vez, verás un icono llamado "Instalador" en el escritorio. Ejecútalo para finalizar la configuración. Una vez terminado, el instalador se borrará solo para dejar el sistema limpio.
+    </div>
+
+    <footer style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; font-size: 12px; color: #888; text-align: center;">
+        &copy; 2026 ErikHub Proyect. ErikOS es una distribución basada en Debian para arquitectura ARM64.
+    </footer>
+</div>
+
+</body>
+</html>
