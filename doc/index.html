@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentación Oficial | ErikOS</title>
+    <style>
+        :root {
+            --bg-color: #f5f5f7;
+            --sidebar-bg: #fbfbfd; /* Color más limpio y brillante */
+            --text-color: #1d1d1f;
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --accent: #0071e3;
+            --accent-hover: rgba(0, 113, 227, 0.1);
+            --border: rgba(0, 0, 0, 0.08);
+            --text-muted: #86868b;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        /* =========================================
+           NUEVO DISEÑO DE BARRA LATERAL (SIDEBAR)
+           ========================================= */
+        .sidebar {
+            width: 300px;
+            background-color: var(--sidebar-bg);
+            height: 100vh;
+            position: sticky;
+            top: 0;
+            padding: 30px 20px;
+            box-sizing: border-box;
+            border-right: 1px solid var(--border);
+            overflow-y: auto;
+        }
+
+        .sidebar-header {
+            font-size: 0.75em;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--text-muted);
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding-left: 10px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar li {
+            margin-bottom: 4px;
+        }
+
+        /* Enlaces principales */
+        .nav-main {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            padding: 10px 12px;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+            font-size: 1.05em;
+        }
+
+        .nav-main span.icon {
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+
+        .nav-main:hover {
+            background-color: var(--accent-hover);
+            color: var(--accent);
+        }
+
+        /* Sub-menús con línea de guía */
+        .sidebar .sub-menu {
+            margin-left: 22px;
+            margin-top: 2px;
+            margin-bottom: 15px;
+            border-left: 2px solid var(--border);
+            padding-left: 8px;
+        }
+
+        .sidebar .sub-menu a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 500;
+            display: block;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.9em;
+            transition: all 0.2s ease;
+        }
+
+        .sidebar .sub-menu a:hover {
+            background-color: var(--accent-hover);
+            color: var(--accent);
+            border-left-color: var(--accent);
+        }
+
+        /* =========================================
+           CONTENIDO PRINCIPAL
+           ========================================= */
+        .main-content {
+            flex: 1;
+            padding: 40px 60px;
+            max-width: 1000px;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            margin-top: 0;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        article {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+            scroll-margin-top: 40px;
+        }
+
+        h2 {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 0;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 15px;
+            font-size: 1.8em;
+        }
+
+        h3 {
+            color: var(--accent);
+            margin-top: 30px;
+        }
+
+        /* Etiquetas */
+        .badge {
+            font-size: 0.4em;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        .badge-pc { background: #e3f2fd; color: #0d47a1; }
+        .badge-mini { background: #ffebee; color: #b71c1c; }
+        .badge-all { background: #e8f5e9; color: #1b5e20; }
+
+        /* Utilidades */
+        .warning {
+            background: #fff3cd;
+            color: #856404;
+            padding: 15px 20px;
+            border-left: 5px solid #ffeeba;
+            border-radius: 6px;
+            margin: 20px 0;
+            font-size: 0.95em;
+        }
+
+        .tip {
+            background: #e3f2fd;
+            color: #0c5460;
+            padding: 15px 20px;
+            border-left: 5px solid #0071e3;
+            border-radius: 6px;
+            margin: 20px 0;
+            font-size: 0.95em;
+        }
+
+        code {
+            background: #e9ecef;
+            padding: 3px 7px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9em;
+            color: #d63384;
+        }
+
+        a.external {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+
+        /* Botón Compartir */
+        .share-container {
+            margin-top: 30px;
+            display: flex;
+            justify-content: flex-end;
+            border-top: 1px solid var(--border);
+            padding-top: 15px;
+        }
+
+        .share-btn {
+            background-color: transparent;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9em;
+            padding: 8px 18px;
+            border: 2px solid var(--accent);
+            border-radius: 20px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .share-btn:hover {
+            background-color: var(--accent);
+            color: white;
+        }
+
+        /* Móvil */
+        @media (max-width: 850px) {
+            body { flex-direction: column; }
+            .sidebar { width: 100%; height: auto; position: static; border-right: none; border-bottom: 1px solid var(--border); }
+            .main-content { padding: 20px; }
+            article { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-header">Manual del Usuario</div>
+        <ul>
+            <li>
+                <a href="#funciones" class="nav-main"><span class="icon">✨</span> Características</a>
+                <ul class="sub-menu">
+                    <li><a href="#func-diseno">Tecnología ErikKit</a></li>
+                    <li><a href="#func-software">Ecosistema Nativo</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#instalar-pc" class="nav-main"><span class="icon">💻</span> Instalación en PC</a>
+                <ul class="sub-menu">
+                    <li><a href="#pc-descarga">Utilidades de flasheo</a></li>
+                    <li><a href="#pc-flasheo">Proceso de escritura</a></li>
+                    <li><a href="#pc-bios">Arranque desde BIOS</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#instalar-mini" class="nav-main"><span class="icon">🍓</span> ErikMini OS</a>
+                <ul class="sub-menu">
+                    <li><a href="#mini-imager">Grabación de Golden Master</a></li>
+                    <li><a href="#mini-sysprep">Configuración de credenciales</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#abrir-mini" class="nav-main"><span class="icon">🔧</span> Hardware</a>
+                <ul class="sub-menu">
+                    <li><a href="#abrir-mini">Guía de desmontaje</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#ayuda" class="nav-main"><span class="icon">❓</span> Soporte Técnico</a>
+                <ul class="sub-menu">
+                    <li><a href="#ayuda-dock">Reinicio de ErikDock</a></li>
+                    <li><a href="#ayuda-transparencia">Compositor de gráficos</a></li>
+                    <li><a href="#ayuda-wifi">Diagnóstico de red</a></li>
+                </ul>
+            </li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        <h1>Soporte de ErikOS</h1>
+        <div class="subtitle">Documentación oficial, guías de instalación y manual técnico de nuestra arquitectura.</div>
+
+        <article id="funciones">
+            <h2>
+                Características Destacadas
+                <span class="badge badge-all">Todas las versiones</span>
+            </h2>
+            <p>ErikOS ha sido desarrollado desde cero para ofrecer un rendimiento inigualable sin sacrificar una estética de primer nivel. Nuestro sistema operativo se basa en un núcleo hiper-optimizado diseñado íntegramente para fusionar productividad y fluidez visual.</p>
+            
+            <h3 id="func-diseno">Tecnología ErikKit y Entorno Visual</h3>
+            <ul>
+                <li><strong>Entorno Gráfico ErikKit:</strong> Nuestro propio entorno de escritorio, construido meticulosamente desde sus cimientos para garantizar que el sistema consuma menos de 800MB de RAM en reposo, convirtiéndolo en uno de los más ligeros del mundo.</li>
+                <li><strong>Diseño Premium y Cristalino:</strong> La interfaz cuenta con un panel superior de cristal translúcido exclusivo y un Dock dinámico e inferior (<strong>ErikDock</strong>) que responde fluidamente a cada una de tus interacciones.</li>
+                <li><strong>Gestor de Inicio Seguro:</strong> Hemos programado a medida nuestra propia pantalla de bloqueo y de inicio de sesión para garantizar la máxima seguridad antes de acceder a tus datos.</li>
+            </ul>
+
+            <h3 id="func-software">Ecosistema Nativo</h3>
+            <ul>
+                <li><strong>Centro de Control de ErikOS:</strong> Una aplicación nativa, programada internamente en Python, que actúa como el corazón de tu ordenador, permitiéndote gestionar los parámetros clave del sistema al instante.</li>
+                <li><strong>ErikOS Gaming Core:</strong> Optimización de bibliotecas nativas que permite compatibilidad total y fluida con plataformas como <strong>Steam</strong> (Nota: Función de gaming exclusiva para la arquitectura x86_64 de PC/Portátiles).</li>
+            </ul>
+            <div class="share-container">
+                <a href="#funciones" class="share-btn" onclick="copiarEnlace(this, 'funciones')">🔗 Compartir sección</a>
+            </div>
+        </article>
+
+        <article id="instalar-pc">
+            <h2>
+                Cómo instalar ErikOS 14 (PC / Portátil)
+                <span class="badge badge-pc">ErikOS 14 (x86_64)</span>
+            </h2>
+            <p>Sigue esta guía paso a paso para flashear la imagen maestra de ErikOS (<code>.iso</code>) y dar una nueva vida a tu ordenador tradicional.</p>
+            
+            <h3 id="pc-descarga">Paso 1: Herramientas Necesarias</h3>
+            <p>Necesitarás un pendrive USB de al menos 8GB (todos los datos de su interior se borrarán) y una utilidad de escritura de discos. Recomendamos las siguientes herramientas estándar de la industria:</p>
+            <ul>
+                <li>Si estás en Windows: Descarga <a href="https://rufus.ie/" class="external" target="_blank">Rufus</a>.</li>
+                <li>Si estás en Mac o un sistema compatible: Descarga <a href="https://etcher.balena.io/" class="external" target="_blank">BalenaEtcher</a>.</li>
+            </ul>
+
+            <h3 id="pc-flasheo">Paso 2: Proceso de Flasheo</h3>
+            <ol>
+                <li>Abre Rufus o BalenaEtcher.</li>
+                <li>En <strong>Dispositivo / Drive</strong>, selecciona tu pendrive USB.</li>
+                <li>En <strong>Selección de Arranque / Image</strong>, busca y selecciona el archivo <code>erikos14.iso</code> que has descargado de nuestros servidores.</li>
+                <li>Haz clic en <strong>Empezar / Flash!</strong> y espera a que la barra de progreso llegue al 100%. Esto puede tardar entre 5 y 15 minutos dependiendo de la velocidad de tu USB.</li>
+            </ol>
+
+            <h3 id="pc-bios">Paso 3: Arranque desde la BIOS</h3>
+            <div class="tip">
+                <strong>💡 Consejo vital para usuarios de Windows:</strong> Antes de encender el equipo, asegúrate de entrar en la configuración de la placa base (BIOS/UEFI) y desactivar la opción <strong>"Secure Boot"</strong>, ya que interfiere con el núcleo de ErikOS.
+            </div>
+            <p>Reinicia tu ordenador con el USB conectado. Justo cuando se encienda la pantalla, presiona repetidamente la tecla de menú de arranque de tu fabricante (suele ser <code>F12</code>, <code>F2</code>, <code>F8</code> o <code>Supr</code>). Selecciona tu USB en la lista y pulsa Enter. ¡El motor de arranque de ErikOS tomará el control!</p>
+            
+            <div class="share-container">
+                <a href="#instalar-pc" class="share-btn" onclick="copiarEnlace(this, 'instalar-pc')">🔗 Compartir sección</a>
+            </div>
+        </article>
+
+        <article id="instalar-mini">
+            <h2>
+                Cómo flashear el sistema para ErikMini
+                <span class="badge badge-mini">ErikMini (ARM64)</span>
+            </h2>
+            <p>El hardware personalizado del ErikMini (arquitectura ARM de ultra bajo consumo) requiere nuestra imagen "Golden Master" específica en formato <code>.img</code>, la cual debe escribirse directamente en su módulo de almacenamiento (MicroSD).</p>
+
+            <h3 id="mini-imager">Paso 1: Uso de la utilidad de escritura</h3>
+            <ol>
+                <li>Descarga e instala la herramienta <a href="https://www.raspberrypi.com/software/" class="external" target="_blank">Raspberry Pi Imager</a> (compatible con nuestro hardware) en tu ordenador principal.</li>
+                <li>Introduce la tarjeta MicroSD (recomendamos mínimo 32GB, alta velocidad) en tu lector.</li>
+                <li>Abre el programa. En <strong>Elegir Dispositivo</strong>, selecciona la opción para procesadores ARM compatibles (como <em>Raspberry Pi 4</em>).</li>
+                <li>En <strong>Elegir SO</strong>, baja del todo en la lista, haz clic en <em>"Usar personalizado"</em> y selecciona el archivo <code>erikos14-pi.img</code>.</li>
+            </ol>
+
+            <h3 id="mini-sysprep">Paso 2: Ajustes Críticos (Inyección de Datos)</h3>
+            <div class="warning">
+                <strong>⚠️ ¡NO SALTES ESTE PASO!</strong> El ErikMini necesita compilar tu configuración de red antes del primer arranque visual.
+            </div>
+            <p>Antes de darle a "Escribir", verás un botón con forma de <strong>engranaje (Ajustes avanzados)</strong>. Haz clic en él y configura tus credenciales:</p>
+            <ul>
+                <li><strong>Usuario y contraseña:</strong> Define tu identidad de administrador y clave de acceso seguro.</li>
+                <li><strong>Configurar LAN Inalámbrica:</strong> Introduce el nombre de tu Wi-Fi (SSID) y tu contraseña exactamente como aparecen en tu router para que el motor de red de ErikOS se conecte en segundo plano.</li>
+                <li><strong>Configuración local:</strong> Pon tu zona horaria y tu idioma de teclado preferido.</li>
+            </ul>
+            <p>Una vez completado, haz clic en <strong>Escribir</strong>. Al terminar, introduce el almacenamiento en tu ErikMini y conéctalo a la corriente. ¡La magia de nuestro First Boot hará el resto!</p>
+
+            <div class="share-container">
+                <a href="#instalar-mini" class="share-btn" onclick="copiarEnlace(this, 'instalar-mini')">🔗 Compartir sección</a>
+            </div>
+        </article>
+
+        <article id="abrir-mini">
+            <h2>
+                Guía de Desmontaje Oficial (ErikMini)
+                <span class="badge badge-mini">ErikMini (Hardware)</span>
+            </h2>
+            <p>Si eres un usuario avanzado y necesitas actualizar el almacenamiento físico interno, deberás abrir la carcasa milimétrica de nuestro dispositivo.</p>
+            
+            <div class="warning">
+                <strong>⚠️ Advertencia de Hardware:</strong> Utiliza las herramientas con precisión quirúrgica. Desconecta siempre la alimentación antes de proceder. Un mal uso de herramientas punzantes podría dañar permanentemente las trazas de la placa base personalizada.
+            </div>
+
+            <ol>
+                <li>Localiza la parte superior de la carcasa, justo donde se encuentra el logotipo grabado de ErikOS.</li>
+                <li>Con una herramienta de apertura plana (o un cuchillo fino con extremo cuidado), haz palanca suavemente empezando <strong>desde el perfil trasero donde se ubican los puertos de conexión</strong>.</li>
+                <li>Desliza la herramienta lentamente por el perímetro hasta liberar los anclajes de compresión y retira la tapa superior.</li>
+                <li>Extrae la placa base en dirección vertical con extrema delicadeza, ya que se encuentra ajustada a la base térmica de la caja.</li>
+                <li>En la cara inferior de la placa base encontrarás el puerto de almacenamiento; extrae suavemente el módulo MicroSD tirando de él en línea recta.</li>
+            </ol>
+            <div class="share-container">
+                <a href="#abrir-mini" class="share-btn" onclick="copiarEnlace(this, 'abrir-mini')">🔗 Compartir sección</a>
+            </div>
+        </article>
+
+        <article id="ayuda">
+            <h2>
+                Centro de Soluciones Rápida
+                <span class="badge badge-all">Todas las versiones</span>
+            </h2>
+            
+            <h3 id="ayuda-dock">El ErikDock inferior no aparece</h3>
+            <p>Si el sistema arranca y el panel inferior no se despliega, el servicio de autoarranque podría haberse pausado. 
+            Abre el panel de control de ErikKit, dirígete a <strong>"Sesión e Inicio"</strong>. En la pestaña "Autoarranque", asegúrate de que el servicio de nuestro Dock esté habilitado para lanzarse con el sistema operativo.</p>
+            
+            <h3 id="ayuda-transparencia">El panel superior no tiene efecto de cristal (Transparencia)</h3>
+            <p>El motor de aceleración gráfica (Compositor) puede haberse puesto en modo ahorro de energía. Ve a los <strong>Ajustes de ErikKit > Efectos del Gestor de Ventanas > Pestaña Compositor</strong>. Verifica que la opción <em>"Activar composición de pantalla"</em> esté activada para restaurar el renderizado avanzado y los desenfoques.</p>
+            
+            <h3 id="ayuda-wifi">El ErikMini no tiene conexión a internet</h3>
+            <p>Si no inyectaste los datos Wi-Fi durante el flasheo de la imagen, el sistema de red de ErikOS se mantendrá en espera. Puedes forzar la conexión abriendo la terminal y ejecutando nuestra herramienta de diagnóstico base: escribe <code>sudo raspi-config</code>, navega hasta <em>System Options > Wireless LAN</em> y vincula tu red manualmente.</p>
+
+            <div class="share-container">
+                <a href="#ayuda" class="share-btn" onclick="copiarEnlace(this, 'ayuda')">🔗 Compartir sección</a>
+            </div>
+        </article>
+
+    </main>
+
+    <script>
+        function copiarEnlace(elemento, idSeccion) {
+            event.preventDefault(); 
+            const urlCompleta = window.location.href.split('#')[0] + '#' + idSeccion;
+            
+            navigator.clipboard.writeText(urlCompleta).then(() => {
+                const textoOriginal = elemento.innerText;
+                elemento.innerText = "✅ ¡Enlace copiado al portapapeles!";
+                elemento.style.backgroundColor = "#e8f5e9";
+                elemento.style.borderColor = "#4caf50";
+                elemento.style.color = "#2e7d32";
+                
+                setTimeout(() => {
+                    elemento.innerText = textoOriginal;
+                    elemento.style.backgroundColor = "transparent";
+                    elemento.style.borderColor = "var(--accent)";
+                    elemento.style.color = "var(--accent)";
+                }, 3000);
+            }).catch(err => {
+                console.error('Error al copiar: ', err);
+                alert("No se pudo copiar el enlace. Tu navegador puede estar bloqueando esta función.");
+            });
+        }
+    </script>
+</body>
+</html>
