@@ -27,6 +27,33 @@
         }
 
         /* =========================================
+           SISTEMA MULTI-IDIOMA (CSS MÁGICO)
+           ========================================= */
+        body[data-lang="es"] .lang-en, body[data-lang="es"] .lang-ca { display: none !important; }
+        body[data-lang="en"] .lang-es, body[data-lang="en"] .lang-ca { display: none !important; }
+        body[data-lang="ca"] .lang-es, body[data-lang="ca"] .lang-en { display: none !important; }
+
+        /* Selector de idioma */
+        .language-switcher {
+            margin-bottom: 25px;
+            padding: 0 10px;
+        }
+        .language-switcher select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background-color: white;
+            font-size: 0.95em;
+            color: var(--text-color);
+            cursor: pointer;
+            outline: none;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            transition: all 0.2s;
+        }
+        .language-switcher select:hover { border-color: var(--accent); }
+
+        /* =========================================
            NUEVO DISEÑO DE BARRA LATERAL (SIDEBAR)
            ========================================= */
         .sidebar {
@@ -244,210 +271,499 @@
         }
     </style>
 </head>
-<body>
+<body data-lang="es">
 
     <aside class="sidebar">
-        <div class="sidebar-header">Manual del Usuario</div>
+        <div class="language-switcher">
+            <select id="lang-select" onchange="cambiarIdioma(this.value)">
+                <option value="es">🇪🇸 Español</option>
+                <option value="en">🇬🇧 English</option>
+                <option value="ca">🟡🔴 Valencià</option>
+            </select>
+        </div>
+
+        <div class="sidebar-header">
+            <span class="lang-es">Manual del Usuario</span>
+            <span class="lang-en">User Manual</span>
+            <span class="lang-ca">Manual de l'Usuari</span>
+        </div>
         <ul>
             <li>
-                <a href="#funciones" class="nav-main"><span class="icon">✨</span> Características</a>
+                <a href="#funciones" class="nav-main">
+                    <span class="icon">✨</span> 
+                    <span class="lang-es">Características</span>
+                    <span class="lang-en">Features</span>
+                    <span class="lang-ca">Característiques</span>
+                </a>
                 <ul class="sub-menu">
-                    <li><a href="#func-diseno">Tecnología ErikKit</a></li>
-                    <li><a href="#func-software">Ecosistema Nativo</a></li>
+                    <li><a href="#func-diseno">
+                        <span class="lang-es">Tecnología ErikKit</span>
+                        <span class="lang-en">ErikKit Technology</span>
+                        <span class="lang-ca">Tecnologia ErikKit</span>
+                    </a></li>
+                    <li><a href="#func-software">
+                        <span class="lang-es">Ecosistema Nativo</span>
+                        <span class="lang-en">Native Ecosystem</span>
+                        <span class="lang-ca">Ecosistema Natiu</span>
+                    </a></li>
                 </ul>
             </li>
             <li>
-                <a href="#instalar-pc" class="nav-main"><span class="icon">💻</span> Instalación en PC</a>
+                <a href="#instalar-pc" class="nav-main">
+                    <span class="icon">💻</span> 
+                    <span class="lang-es">Instalación en PC</span>
+                    <span class="lang-en">PC Installation</span>
+                    <span class="lang-ca">Instal·lació en PC</span>
+                </a>
                 <ul class="sub-menu">
-                    <li><a href="#pc-descarga">Utilidades de flasheo</a></li>
-                    <li><a href="#pc-flasheo">Proceso de escritura</a></li>
-                    <li><a href="#pc-bios">Arranque desde BIOS</a></li>
+                    <li><a href="#pc-descarga">
+                        <span class="lang-es">Utilidades de flasheo</span>
+                        <span class="lang-en">Flashing utilities</span>
+                        <span class="lang-ca">Utilitats de flasseig</span>
+                    </a></li>
+                    <li><a href="#pc-flasheo">
+                        <span class="lang-es">Proceso de escritura</span>
+                        <span class="lang-en">Writing process</span>
+                        <span class="lang-ca">Procés d'escriptura</span>
+                    </a></li>
+                    <li><a href="#pc-bios">
+                        <span class="lang-es">Arranque desde BIOS</span>
+                        <span class="lang-en">Boot from BIOS</span>
+                        <span class="lang-ca">Arrancada des de BIOS</span>
+                    </a></li>
                 </ul>
             </li>
             <li>
-                <a href="#instalar-mini" class="nav-main"><span class="icon">🍓</span> ErikMini OS</a>
+                <a href="#instalar-mini" class="nav-main">
+                    <span class="icon">🍓</span> 
+                    <span class="lang-es">ErikMini OS</span>
+                    <span class="lang-en">ErikMini OS</span>
+                    <span class="lang-ca">ErikMini OS</span>
+                </a>
                 <ul class="sub-menu">
-                    <li><a href="#mini-imager">Grabación de Golden Master</a></li>
-                    <li><a href="#mini-sysprep">Configuración de credenciales</a></li>
+                    <li><a href="#mini-imager">
+                        <span class="lang-es">Grabación de Golden Master</span>
+                        <span class="lang-en">Golden Master Flashing</span>
+                        <span class="lang-ca">Enregistrament de Golden Master</span>
+                    </a></li>
+                    <li><a href="#mini-sysprep">
+                        <span class="lang-es">Configuración de credenciales</span>
+                        <span class="lang-en">Credentials configuration</span>
+                        <span class="lang-ca">Configuració de credencials</span>
+                    </a></li>
                 </ul>
             </li>
             <li>
-                <a href="#abrir-mini" class="nav-main"><span class="icon">🔧</span> Hardware</a>
+                <a href="#abrir-mini" class="nav-main">
+                    <span class="icon">🔧</span> 
+                    <span class="lang-es">Hardware</span>
+                    <span class="lang-en">Hardware</span>
+                    <span class="lang-ca">Maquinari</span>
+                </a>
                 <ul class="sub-menu">
-                    <li><a href="#abrir-mini">Guía de desmontaje</a></li>
+                    <li><a href="#abrir-mini">
+                        <span class="lang-es">Guía de desmontaje</span>
+                        <span class="lang-en">Teardown guide</span>
+                        <span class="lang-ca">Guia de desmuntatge</span>
+                    </a></li>
                 </ul>
             </li>
             <li>
-                <a href="#ayuda" class="nav-main"><span class="icon">❓</span> Soporte Técnico</a>
+                <a href="#ayuda" class="nav-main">
+                    <span class="icon">❓</span> 
+                    <span class="lang-es">Soporte Técnico</span>
+                    <span class="lang-en">Technical Support</span>
+                    <span class="lang-ca">Suport Tècnic</span>
+                </a>
                 <ul class="sub-menu">
-                    <li><a href="#ayuda-dock">Reinicio de ErikDock</a></li>
-                    <li><a href="#ayuda-transparencia">Compositor de gráficos</a></li>
-                    <li><a href="#ayuda-wifi">Diagnóstico de red</a></li>
+                    <li><a href="#ayuda-dock">
+                        <span class="lang-es">Reinicio de ErikDock</span>
+                        <span class="lang-en">ErikDock Restart</span>
+                        <span class="lang-ca">Reinici d'ErikDock</span>
+                    </a></li>
+                    <li><a href="#ayuda-transparencia">
+                        <span class="lang-es">Compositor de gráficos</span>
+                        <span class="lang-en">Graphics compositor</span>
+                        <span class="lang-ca">Compositor de gràfics</span>
+                    </a></li>
+                    <li><a href="#ayuda-wifi">
+                        <span class="lang-es">Diagnóstico de red</span>
+                        <span class="lang-en">Network diagnostics</span>
+                        <span class="lang-ca">Diagnòstic de xarxa</span>
+                    </a></li>
                 </ul>
             </li>
         </ul>
     </aside>
 
     <main class="main-content">
-        <h1>Soporte de ErikOS</h1>
-        <div class="subtitle">Documentación oficial, guías de instalación y manual técnico de nuestra arquitectura.</div>
+        <h1>
+            <span class="lang-es">Soporte de ErikOS</span>
+            <span class="lang-en">ErikOS Support</span>
+            <span class="lang-ca">Suport d'ErikOS</span>
+        </h1>
+        <div class="subtitle">
+            <span class="lang-es">Documentación oficial, guías de instalación y manual técnico de nuestra arquitectura.</span>
+            <span class="lang-en">Official documentation, installation guides, and technical manual of our architecture.</span>
+            <span class="lang-ca">Documentació oficial, guies d'instal·lació i manual tècnic de la nostra arquitectura.</span>
+        </div>
 
         <article id="funciones">
             <h2>
-                Características Destacadas
-                <span class="badge badge-all">Todas las versiones</span>
+                <span class="lang-es">Características Destacadas</span>
+                <span class="lang-en">Key Features</span>
+                <span class="lang-ca">Característiques Destacades</span>
+                <span class="badge badge-all">
+                    <span class="lang-es">Todas las versiones</span>
+                    <span class="lang-en">All versions</span>
+                    <span class="lang-ca">Totes les versions</span>
+                </span>
             </h2>
-            <p>ErikOS ha sido desarrollado desde cero para ofrecer un rendimiento inigualable sin sacrificar una estética de primer nivel. Nuestro sistema operativo se basa en un núcleo hiper-optimizado diseñado íntegramente para fusionar productividad y fluidez visual.</p>
+            <p class="lang-es">ErikOS ha sido desarrollado desde cero para ofrecer un rendimiento inigualable sin sacrificar una estética de primer nivel. Nuestro sistema operativo se basa en un núcleo hiper-optimizado diseñado íntegramente para fusionar productividad y fluidez visual.</p>
+            <p class="lang-en">ErikOS has been built from the ground up to offer unmatched performance without sacrificing premium aesthetics. Our operating system is based on a hyper-optimized core designed entirely to merge productivity and visual fluidity.</p>
+            <p class="lang-ca">ErikOS ha sigut desenvolupat des de zero per a oferir un rendiment inigualable sense sacrificar una estètica de primer nivell. El nostre sistema operatiu es basa en un nucli hiperoptimitzat dissenyat íntegrament per a fusionar productivitat i fluïdesa visual.</p>
             
-            <h3 id="func-diseno">Tecnología ErikKit y Entorno Visual</h3>
+            <h3 id="func-diseno">
+                <span class="lang-es">Tecnología ErikKit y Entorno Visual</span>
+                <span class="lang-en">ErikKit Technology and Visual Environment</span>
+                <span class="lang-ca">Tecnologia ErikKit i Entorn Visual</span>
+            </h3>
             <ul>
-                <li><strong>Entorno Gráfico ErikKit:</strong> Nuestro propio entorno de escritorio, construido meticulosamente desde sus cimientos para garantizar que el sistema consuma menos de 800MB de RAM en reposo, convirtiéndolo en uno de los más ligeros del mundo.</li>
-                <li><strong>Diseño Premium y Cristalino:</strong> La interfaz cuenta con un panel superior de cristal translúcido exclusivo y un Dock dinámico e inferior (<strong>ErikDock</strong>) que responde fluidamente a cada una de tus interacciones.</li>
-                <li><strong>Gestor de Inicio Seguro:</strong> Hemos programado a medida nuestra propia pantalla de bloqueo y de inicio de sesión para garantizar la máxima seguridad antes de acceder a tus datos.</li>
+                <li class="lang-es"><strong>Entorno Gráfico ErikKit:</strong> Nuestro propio entorno de escritorio, construido meticulosamente desde sus cimientos para garantizar que el sistema consuma menos de 800MB de RAM en reposo, convirtiéndolo en uno de los más ligeros del mundo.</li>
+                <li class="lang-en"><strong>ErikKit Graphical Environment:</strong> Our own desktop environment, meticulously built from the ground up to ensure the system consumes less than 800MB of RAM at idle, making it one of the lightest in the world.</li>
+                <li class="lang-ca"><strong>Entorn Gràfic ErikKit:</strong> El nostre propi entorn d'escriptori, construït meticulosament des dels seus fonaments per a garantir que el sistema consumisca menys de 800MB de RAM en repòs, convertint-lo en un dels més lleugers del món.</li>
+                
+                <li class="lang-es"><strong>Diseño Premium y Cristalino:</strong> La interfaz cuenta con un panel superior de cristal translúcido exclusivo y un Dock dinámico e inferior (<strong>ErikDock</strong>) que responde fluidamente a cada una de tus interacciones.</li>
+                <li class="lang-en"><strong>Premium and Crystal Design:</strong> The interface features an exclusive translucent glass top panel and a dynamic bottom Dock (<strong>ErikDock</strong>) that responds fluidly to every interaction.</li>
+                <li class="lang-ca"><strong>Disseny Premium i Cristal·lí:</strong> La interfície compta amb un tauler superior de cristall translúcid exclusiu i un Dock dinàmic i inferior (<strong>ErikDock</strong>) que respon fluidament a cadascuna de les teues interaccions.</li>
+                
+                <li class="lang-es"><strong>Gestor de Inicio Seguro:</strong> Hemos programado a medida nuestra propia pantalla de bloqueo y de inicio de sesión para garantizar la máxima seguridad antes de acceder a tus datos.</li>
+                <li class="lang-en"><strong>Secure Login Manager:</strong> We have custom-programmed our own lock screen and login screen to ensure maximum security before accessing your data.</li>
+                <li class="lang-ca"><strong>Gestor d'Inici Segur:</strong> Hem programat a mida la nostra pròpia pantalla de bloqueig i d'inici de sessió per a garantir la màxima seguretat abans d'accedir a les teues dades.</li>
             </ul>
 
-            <h3 id="func-software">Ecosistema Nativo</h3>
+            <h3 id="func-software">
+                <span class="lang-es">Ecosistema Nativo</span>
+                <span class="lang-en">Native Ecosystem</span>
+                <span class="lang-ca">Ecosistema Natiu</span>
+            </h3>
             <ul>
-                <li><strong>Centro de Control de ErikOS:</strong> Una aplicación nativa, programada internamente en Python, que actúa como el corazón de tu ordenador, permitiéndote gestionar los parámetros clave del sistema al instante.</li>
-                <li><strong>ErikOS Gaming Core:</strong> Optimización de bibliotecas nativas que permite compatibilidad total y fluida con plataformas como <strong>Steam</strong> (Nota: Función de gaming exclusiva para la arquitectura x86_64 de PC/Portátiles).</li>
+                <li class="lang-es"><strong>Centro de Control de ErikOS:</strong> Una aplicación nativa, programada internamente en Python, que actúa como el corazón de tu ordenador, permitiéndote gestionar los parámetros clave del sistema al instante.</li>
+                <li class="lang-en"><strong>ErikOS Control Center:</strong> A native application, internally programmed in Python, that acts as the heart of your computer, allowing you to instantly manage key system parameters.</li>
+                <li class="lang-ca"><strong>Centre de Control d'ErikOS:</strong> Una aplicació nativa, programada internament en Python, que actua com el cor del teu ordinador, permetent-te gestionar els paràmetres clau del sistema a l'instant.</li>
+                
+                <li class="lang-es"><strong>ErikOS Gaming Core:</strong> Optimización de bibliotecas nativas que permite compatibilidad total y fluida con plataformas como <strong>Steam</strong> (Nota: Función de gaming exclusiva para la arquitectura x86_64 de PC/Portátiles).</li>
+                <li class="lang-en"><strong>ErikOS Gaming Core:</strong> Optimization of native libraries that allows full and fluid compatibility with platforms like <strong>Steam</strong> (Note: Gaming feature exclusive to the x86_64 PC/Laptop architecture).</li>
+                <li class="lang-ca"><strong>ErikOS Gaming Core:</strong> Optimització de biblioteques natives que permet compatibilitat total i fluida amb plataformes com <strong>Steam</strong> (Nota: Funció de gaming exclusiva per a l'arquitectura x86_64 de PC/Portàtils).</li>
             </ul>
             <div class="share-container">
-                <a href="#funciones" class="share-btn" onclick="copiarEnlace(this, 'funciones')">🔗 Compartir sección</a>
+                <a href="#funciones" class="share-btn" onclick="copiarEnlace(this, 'funciones')">
+                    <span class="lang-es">🔗 Compartir sección</span>
+                    <span class="lang-en">🔗 Share section</span>
+                    <span class="lang-ca">🔗 Compartir secció</span>
+                </a>
             </div>
         </article>
 
         <article id="instalar-pc">
             <h2>
-                Cómo instalar ErikOS 14 (PC / Portátil)
+                <span class="lang-es">Cómo instalar ErikOS 14 (PC / Portátil)</span>
+                <span class="lang-en">How to install ErikOS 14 (PC / Laptop)</span>
+                <span class="lang-ca">Com instal·lar ErikOS 14 (PC / Portàtil)</span>
                 <span class="badge badge-pc">ErikOS 14 (x86_64)</span>
             </h2>
-            <p>Sigue esta guía paso a paso para flashear la imagen maestra de ErikOS (<code>.iso</code>) y dar una nueva vida a tu ordenador tradicional.</p>
+            <p class="lang-es">Sigue esta guía paso a paso para flashear la imagen maestra de ErikOS (<code>.iso</code>) y dar una nueva vida a tu ordenador tradicional.</p>
+            <p class="lang-en">Follow this step-by-step guide to flash the ErikOS master image (<code>.iso</code>) and give your traditional computer a new life.</p>
+            <p class="lang-ca">Segueix aquesta guia pas a pas per a flassejar la imatge mestra d'ErikOS (<code>.iso</code>) i donar una nova vida al teu ordinador tradicional.</p>
             
-            <h3 id="pc-descarga">Paso 1: Herramientas Necesarias</h3>
-            <p>Necesitarás un pendrive USB de al menos 8GB (todos los datos de su interior se borrarán) y una utilidad de escritura de discos. Recomendamos las siguientes herramientas estándar de la industria:</p>
+            <h3 id="pc-descarga">
+                <span class="lang-es">Paso 1: Herramientas Necesarias</span>
+                <span class="lang-en">Step 1: Required Tools</span>
+                <span class="lang-ca">Pas 1: Eines Necessàries</span>
+            </h3>
+            <p class="lang-es">Necesitarás un pendrive USB de al menos 8GB (todos los datos de su interior se borrarán) y una utilidad de escritura de discos. Recomendamos las siguientes herramientas estándar de la industria:</p>
+            <p class="lang-en">You will need a USB flash drive of at least 8GB (all internal data will be erased) and a disk writing utility. We recommend the following industry-standard tools:</p>
+            <p class="lang-ca">Necessitaràs un pendrive USB d'almenys 8GB (totes les dades del seu interior s'esborraran) i una utilitat d'escriptura de discos. Recomanem les següents eines estàndard de la indústria:</p>
             <ul>
-                <li>Si estás en Windows: Descarga <a href="https://rufus.ie/" class="external" target="_blank">Rufus</a>.</li>
-                <li>Si estás en Mac o un sistema compatible: Descarga <a href="https://etcher.balena.io/" class="external" target="_blank">BalenaEtcher</a>.</li>
+                <li class="lang-es">Si estás en Windows: Descarga <a href="https://rufus.ie/" class="external" target="_blank">Rufus</a>.</li>
+                <li class="lang-en">If you are on Windows: Download <a href="https://rufus.ie/" class="external" target="_blank">Rufus</a>.</li>
+                <li class="lang-ca">Si estàs en Windows: Descarrega <a href="https://rufus.ie/" class="external" target="_blank">Rufus</a>.</li>
+                
+                <li class="lang-es">Si estás en Mac o un sistema compatible: Descarga <a href="https://etcher.balena.io/" class="external" target="_blank">BalenaEtcher</a>.</li>
+                <li class="lang-en">If you are on Mac or a compatible system: Download <a href="https://etcher.balena.io/" class="external" target="_blank">BalenaEtcher</a>.</li>
+                <li class="lang-ca">Si estàs en Mac o un sistema compatible: Descarrega <a href="https://etcher.balena.io/" class="external" target="_blank">BalenaEtcher</a>.</li>
             </ul>
 
-            <h3 id="pc-flasheo">Paso 2: Proceso de Flasheo</h3>
+            <h3 id="pc-flasheo">
+                <span class="lang-es">Paso 2: Proceso de Flasheo</span>
+                <span class="lang-en">Step 2: Flashing Process</span>
+                <span class="lang-ca">Pas 2: Procés de Flasseig</span>
+            </h3>
             <ol>
-                <li>Abre Rufus o BalenaEtcher.</li>
-                <li>En <strong>Dispositivo / Drive</strong>, selecciona tu pendrive USB.</li>
-                <li>En <strong>Selección de Arranque / Image</strong>, busca y selecciona el archivo <code>erikos14.iso</code> que has descargado de nuestros servidores.</li>
-                <li>Haz clic en <strong>Empezar / Flash!</strong> y espera a que la barra de progreso llegue al 100%. Esto puede tardar entre 5 y 15 minutos dependiendo de la velocidad de tu USB.</li>
+                <li class="lang-es">Abre Rufus o BalenaEtcher.</li>
+                <li class="lang-en">Open Rufus or BalenaEtcher.</li>
+                <li class="lang-ca">Obri Rufus o BalenaEtcher.</li>
+                
+                <li class="lang-es">En <strong>Dispositivo / Drive</strong>, selecciona tu pendrive USB.</li>
+                <li class="lang-en">Under <strong>Device / Drive</strong>, select your USB flash drive.</li>
+                <li class="lang-ca">En <strong>Dispositiu / Drive</strong>, selecciona el teu pendrive USB.</li>
+                
+                <li class="lang-es">En <strong>Selección de Arranque / Image</strong>, busca y selecciona el archivo <code>erikos14.iso</code> que has descargado de nuestros servidores.</li>
+                <li class="lang-en">Under <strong>Boot Selection / Image</strong>, locate and select the <code>erikos14.iso</code> file you downloaded from our servers.</li>
+                <li class="lang-ca">En <strong>Selecció d'Arrancada / Image</strong>, busca i selecciona l'arxiu <code>erikos14.iso</code> que has descarregat dels nostres servidors.</li>
+                
+                <li class="lang-es">Haz clic en <strong>Empezar / Flash!</strong> y espera a que la barra de progreso llegue al 100%. Esto puede tardar entre 5 y 15 minutos dependiendo de la velocidad de tu USB.</li>
+                <li class="lang-en">Click on <strong>Start / Flash!</strong> and wait for the progress bar to reach 100%. This can take between 5 and 15 minutes depending on your USB speed.</li>
+                <li class="lang-ca">Fes clic en <strong>Començar / Flash!</strong> i espera que la barra de progrés arribe al 100%. Això pot tardar entre 5 i 15 minuts depenent de la velocitat del teu USB.</li>
             </ol>
 
-            <h3 id="pc-bios">Paso 3: Arranque desde la BIOS</h3>
+            <h3 id="pc-bios">
+                <span class="lang-es">Paso 3: Arranque desde la BIOS</span>
+                <span class="lang-en">Step 3: Boot from BIOS</span>
+                <span class="lang-ca">Pas 3: Arrancada des de la BIOS</span>
+            </h3>
             <div class="tip">
-                <strong>💡 Consejo vital para usuarios de Windows:</strong> Antes de encender el equipo, asegúrate de entrar en la configuración de la placa base (BIOS/UEFI) y desactivar la opción <strong>"Secure Boot"</strong>, ya que interfiere con el núcleo de ErikOS.
+                <span class="lang-es"><strong>💡 Consejo vital para usuarios de Windows:</strong> Antes de encender el equipo, asegúrate de entrar en la configuración de la placa base (BIOS/UEFI) y desactivar la opción <strong>"Secure Boot"</strong>, ya que interfiere con el núcleo de ErikOS.</span>
+                <span class="lang-en"><strong>💡 Vital tip for Windows users:</strong> Before turning on the computer, make sure to enter the motherboard settings (BIOS/UEFI) and disable the <strong>"Secure Boot"</strong> option, as it interferes with the ErikOS core.</span>
+                <span class="lang-ca"><strong>💡 Consell vital per a usuaris de Windows:</strong> Abans d'encendre l'equip, assegura't d'entrar en la configuració de la placa base (BIOS/UEFI) i desactivar l'opció <strong>"Secure Boot"</strong>, ja que interfereix amb el nucli d'ErikOS.</span>
             </div>
-            <p>Reinicia tu ordenador con el USB conectado. Justo cuando se encienda la pantalla, presiona repetidamente la tecla de menú de arranque de tu fabricante (suele ser <code>F12</code>, <code>F2</code>, <code>F8</code> o <code>Supr</code>). Selecciona tu USB en la lista y pulsa Enter. ¡El motor de arranque de ErikOS tomará el control!</p>
+            <p class="lang-es">Reinicia tu ordenador con el USB conectado. Justo cuando se encienda la pantalla, presiona repetidamente la tecla de menú de arranque de tu fabricante (suele ser <code>F12</code>, <code>F2</code>, <code>F8</code> o <code>Supr</code>). Selecciona tu USB en la lista y pulsa Enter. ¡El motor de arranque de ErikOS tomará el control!</p>
+            <p class="lang-en">Restart your computer with the USB connected. Right when the screen turns on, repeatedly press your manufacturer's boot menu key (usually <code>F12</code>, <code>F2</code>, <code>F8</code>, or <code>Del</code>). Select your USB from the list and press Enter. The ErikOS boot engine will take control!</p>
+            <p class="lang-ca">Reinicia el teu ordinador amb l'USB connectat. Just quan s'encenga la pantalla, pressiona repetidament la tecla de menú d'arrancada del teu fabricant (sol ser <code>F12</code>, <code>F2</code>, <code>F8</code> o <code>Supr</code>). Selecciona el teu USB en la llista i prem Enter. El motor d'arrancada d'ErikOS prendrà el control!</p>
             
             <div class="share-container">
-                <a href="#instalar-pc" class="share-btn" onclick="copiarEnlace(this, 'instalar-pc')">🔗 Compartir sección</a>
+                <a href="#instalar-pc" class="share-btn" onclick="copiarEnlace(this, 'instalar-pc')">
+                    <span class="lang-es">🔗 Compartir sección</span>
+                    <span class="lang-en">🔗 Share section</span>
+                    <span class="lang-ca">🔗 Compartir secció</span>
+                </a>
             </div>
         </article>
 
         <article id="instalar-mini">
             <h2>
-                Cómo flashear el sistema para ErikMini
+                <span class="lang-es">Cómo flashear el sistema para ErikMini</span>
+                <span class="lang-en">How to flash the system for ErikMini</span>
+                <span class="lang-ca">Com flassejar el sistema per a ErikMini</span>
                 <span class="badge badge-mini">ErikMini (ARM64)</span>
             </h2>
-            <p>El hardware personalizado del ErikMini (arquitectura ARM de ultra bajo consumo) requiere nuestra imagen "Golden Master" específica en formato <code>.img</code>, la cual debe escribirse directamente en su módulo de almacenamiento (MicroSD).</p>
+            <p class="lang-es">El hardware personalizado del ErikMini (arquitectura ARM de ultra bajo consumo) requiere nuestra imagen "Golden Master" específica en formato <code>.img</code>, la cual debe escribirse directamente en su módulo de almacenamiento (MicroSD).</p>
+            <p class="lang-en">The custom hardware of the ErikMini (ultra-low power ARM architecture) requires our specific "Golden Master" image in <code>.img</code> format, which must be written directly to its storage module (MicroSD).</p>
+            <p class="lang-ca">El maquinari personalitzat de l'ErikMini (arquitectura ARM d'ultra baix consum) requereix la nostra imatge "Golden Master" específica en format <code>.img</code>, la qual deu escriure's directament en el seu mòdul d'emmagatzematge (MicroSD).</p>
 
-            <h3 id="mini-imager">Paso 1: Uso de la utilidad de escritura</h3>
+            <h3 id="mini-imager">
+                <span class="lang-es">Paso 1: Uso de la utilidad de escritura</span>
+                <span class="lang-en">Step 1: Using the writing utility</span>
+                <span class="lang-ca">Pas 1: Ús de la utilitat d'escriptura</span>
+            </h3>
             <ol>
-                <li>Descarga e instala la herramienta <a href="https://www.raspberrypi.com/software/" class="external" target="_blank">Raspberry Pi Imager</a> (compatible con nuestro hardware) en tu ordenador principal.</li>
-                <li>Introduce la tarjeta MicroSD (recomendamos mínimo 32GB, alta velocidad) en tu lector.</li>
-                <li>Abre el programa. En <strong>Elegir Dispositivo</strong>, selecciona la opción para procesadores ARM compatibles (como <em>Raspberry Pi 4</em>).</li>
-                <li>En <strong>Elegir SO</strong>, baja del todo en la lista, haz clic en <em>"Usar personalizado"</em> y selecciona el archivo <code>erikos14-pi.img</code>.</li>
+                <li class="lang-es">Descarga e instala la herramienta <a href="https://www.raspberrypi.com/software/" class="external" target="_blank">Raspberry Pi Imager</a> (compatible con nuestro hardware) en tu ordenador principal.</li>
+                <li class="lang-en">Download and install the <a href="https://www.raspberrypi.com/software/" class="external" target="_blank">Raspberry Pi Imager</a> tool (compatible with our hardware) on your main computer.</li>
+                <li class="lang-ca">Descarrega i instal·la l'eina <a href="https://www.raspberrypi.com/software/" class="external" target="_blank">Raspberry Pi Imager</a> (compatible amb el nostre maquinari) en el teu ordinador principal.</li>
+                
+                <li class="lang-es">Introduce la tarjeta MicroSD (recomendamos mínimo 32GB, alta velocidad) en tu lector.</li>
+                <li class="lang-en">Insert the MicroSD card (we recommend at least 32GB, high speed) into your reader.</li>
+                <li class="lang-ca">Introdueix la targeta MicroSD (recomanem mínim 32GB, alta velocitat) en el teu lector.</li>
+                
+                <li class="lang-es">Abre el programa. En <strong>Elegir Dispositivo</strong>, selecciona la opción para procesadores ARM compatibles (como <em>Raspberry Pi 4</em>).</li>
+                <li class="lang-en">Open the program. Under <strong>Choose Device</strong>, select the option for compatible ARM processors (like <em>Raspberry Pi 4</em>).</li>
+                <li class="lang-ca">Obri el programa. En <strong>Elegir Dispositiu</strong>, selecciona l'opció per a processadors ARM compatibles (com <em>Raspberry Pi 4</em>).</li>
+                
+                <li class="lang-es">En <strong>Elegir SO</strong>, baja del todo en la lista, haz clic en <em>"Usar personalizado"</em> y selecciona el archivo <code>erikos14-pi.img</code>.</li>
+                <li class="lang-en">Under <strong>Choose OS</strong>, scroll all the way down, click on <em>"Use custom"</em> and select the <code>erikos14-pi.img</code> file.</li>
+                <li class="lang-ca">En <strong>Elegir SO</strong>, baixa del tot en la llista, fes clic en <em>"Usar personalitzat"</em> i selecciona l'arxiu <code>erikos14-pi.img</code>.</li>
             </ol>
 
-            <h3 id="mini-sysprep">Paso 2: Ajustes Críticos (Inyección de Datos)</h3>
+            <h3 id="mini-sysprep">
+                <span class="lang-es">Paso 2: Ajustes Críticos (Inyección de Datos)</span>
+                <span class="lang-en">Step 2: Critical Settings (Data Injection)</span>
+                <span class="lang-ca">Pas 2: Ajustaments Crítics (Injecció de Dades)</span>
+            </h3>
             <div class="warning">
-                <strong>⚠️ ¡NO SALTES ESTE PASO!</strong> El ErikMini necesita compilar tu configuración de red antes del primer arranque visual.
+                <span class="lang-es"><strong>⚠️ ¡NO SALTES ESTE PASO!</strong> El ErikMini necesita compilar tu configuración de red antes del primer arranque visual.</span>
+                <span class="lang-en"><strong>⚠️ DO NOT SKIP THIS STEP!</strong> The ErikMini needs to compile your network configuration before the first visual boot.</span>
+                <span class="lang-ca"><strong>⚠️ NO SALTIS AQUEST PAS!</strong> L'ErikMini necessita compilar la teua configuració de xarxa abans de la primera arrancada visual.</span>
             </div>
-            <p>Antes de darle a "Escribir", verás un botón con forma de <strong>engranaje (Ajustes avanzados)</strong>. Haz clic en él y configura tus credenciales:</p>
+            <p class="lang-es">Antes de darle a "Escribir", verás un botón con forma de <strong>engranaje (Ajustes avanzados)</strong>. Haz clic en él y configura tus credenciales:</p>
+            <p class="lang-en">Before clicking "Write", you will see a button shaped like a <strong>gear (Advanced settings)</strong>. Click on it and configure your credentials:</p>
+            <p class="lang-ca">Abans de donar-li a "Escriure", veuràs un botó amb forma de <strong>engranatge (Ajustaments avançats)</strong>. Fes clic en ell i configura les teues credencials:</p>
             <ul>
-                <li><strong>Usuario y contraseña:</strong> Define tu identidad de administrador y clave de acceso seguro.</li>
-                <li><strong>Configurar LAN Inalámbrica:</strong> Introduce el nombre de tu Wi-Fi (SSID) y tu contraseña exactamente como aparecen en tu router para que el motor de red de ErikOS se conecte en segundo plano.</li>
-                <li><strong>Configuración local:</strong> Pon tu zona horaria y tu idioma de teclado preferido.</li>
+                <li class="lang-es"><strong>Usuario y contraseña:</strong> Define tu identidad de administrador y clave de acceso seguro.</li>
+                <li class="lang-en"><strong>Username and password:</strong> Define your administrator identity and secure access key.</li>
+                <li class="lang-ca"><strong>Usuari i contrasenya:</strong> Defineix la teua identitat d'administrador i clau d'accés segur.</li>
+                
+                <li class="lang-es"><strong>Configurar LAN Inalámbrica:</strong> Introduce el nombre de tu Wi-Fi (SSID) y tu contraseña exactamente como aparecen en tu router para que el motor de red de ErikOS se conecte en segundo plano.</li>
+                <li class="lang-en"><strong>Configure Wireless LAN:</strong> Enter your Wi-Fi name (SSID) and password exactly as they appear on your router so the ErikOS network engine connects in the background.</li>
+                <li class="lang-ca"><strong>Configurar LAN Inalàmbrica:</strong> Introdueix el nom del teu Wi-Fi (SSID) i la teua contrasenya exactament com apareixen al teu router perquè el motor de xarxa d'ErikOS es connecte en segon pla.</li>
+                
+                <li class="lang-es"><strong>Configuración local:</strong> Pon tu zona horaria y tu idioma de teclado preferido.</li>
+                <li class="lang-en"><strong>Local settings:</strong> Set your time zone and preferred keyboard language.</li>
+                <li class="lang-ca"><strong>Configuració local:</strong> Posa la teua zona horària i el teu idioma de teclat preferit.</li>
             </ul>
-            <p>Una vez completado, haz clic en <strong>Escribir</strong>. Al terminar, introduce el almacenamiento en tu ErikMini y conéctalo a la corriente. ¡La magia de nuestro First Boot hará el resto!</p>
+            <p class="lang-es">Una vez completado, haz clic en <strong>Escribir</strong>. Al terminar, introduce el almacenamiento en tu ErikMini y conéctalo a la corriente. ¡La magia de nuestro First Boot hará el resto!</p>
+            <p class="lang-en">Once completed, click on <strong>Write</strong>. When finished, insert the storage into your ErikMini and plug it into power. The magic of our First Boot will do the rest!</p>
+            <p class="lang-ca">Una vegada completat, fes clic en <strong>Escriure</strong>. En acabar, introdueix l'emmagatzematge al teu ErikMini i connecta'l a la corrent. La màgia del nostre First Boot farà la resta!</p>
 
             <div class="share-container">
-                <a href="#instalar-mini" class="share-btn" onclick="copiarEnlace(this, 'instalar-mini')">🔗 Compartir sección</a>
+                <a href="#instalar-mini" class="share-btn" onclick="copiarEnlace(this, 'instalar-mini')">
+                    <span class="lang-es">🔗 Compartir sección</span>
+                    <span class="lang-en">🔗 Share section</span>
+                    <span class="lang-ca">🔗 Compartir secció</span>
+                </a>
             </div>
         </article>
 
         <article id="abrir-mini">
             <h2>
-                Guía de Desmontaje Oficial (ErikMini)
-                <span class="badge badge-mini">ErikMini (Hardware)</span>
+                <span class="lang-es">Guía de Desmontaje Oficial (ErikMini)</span>
+                <span class="lang-en">Official Teardown Guide (ErikMini)</span>
+                <span class="lang-ca">Guia de Desmuntatge Oficial (ErikMini)</span>
+                <span class="badge badge-mini">
+                    <span class="lang-es">Hardware</span>
+                    <span class="lang-en">Hardware</span>
+                    <span class="lang-ca">Maquinari</span>
+                </span>
             </h2>
-            <p>Si eres un usuario avanzado y necesitas actualizar el almacenamiento físico interno, deberás abrir la carcasa milimétrica de nuestro dispositivo.</p>
+            <p class="lang-es">Si eres un usuario avanzado y necesitas actualizar el almacenamiento físico interno, deberás abrir la carcasa milimétrica de nuestro dispositivo.</p>
+            <p class="lang-en">If you are an advanced user and need to upgrade the internal physical storage, you will need to open the millimeter-precise casing of our device.</p>
+            <p class="lang-ca">Si eres un usuari avançat i necessites actualitzar l'emmagatzematge físic intern, hauràs d'obrir la carcassa mil·limètrica del nostre dispositiu.</p>
             
             <div class="warning">
-                <strong>⚠️ Advertencia de Hardware:</strong> Utiliza las herramientas con precisión quirúrgica. Desconecta siempre la alimentación antes de proceder. Un mal uso de herramientas punzantes podría dañar permanentemente las trazas de la placa base personalizada.
+                <span class="lang-es"><strong>⚠️ Advertencia de Hardware:</strong> Utiliza las herramientas con precisión quirúrgica. Desconecta siempre la alimentación antes de proceder. Un mal uso de herramientas punzantes podría dañar permanentemente las trazas de la placa base personalizada.</span>
+                <span class="lang-en"><strong>⚠️ Hardware Warning:</strong> Use tools with surgical precision. Always disconnect power before proceeding. Misuse of sharp tools could permanently damage the traces on the custom motherboard.</span>
+                <span class="lang-ca"><strong>⚠️ Advertència de Maquinari:</strong> Utilitza les eines amb precisió quirúrgica. Desconnecta sempre l'alimentació abans de procedir. Un mal ús d'eines punxants podria danyar permanentment les traces de la placa base personalitzada.</span>
             </div>
 
             <ol>
-                <li>Localiza la parte superior de la carcasa, justo donde se encuentra el logotipo grabado de ErikOS.</li>
-                <li>Con una herramienta de apertura plana (o un cuchillo fino con extremo cuidado), haz palanca suavemente empezando <strong>desde el perfil trasero donde se ubican los puertos de conexión</strong>.</li>
-                <li>Desliza la herramienta lentamente por el perímetro hasta liberar los anclajes de compresión y retira la tapa superior.</li>
-                <li>Extrae la placa base en dirección vertical con extrema delicadeza, ya que se encuentra ajustada a la base térmica de la caja.</li>
-                <li>En la cara inferior de la placa base encontrarás el puerto de almacenamiento; extrae suavemente el módulo MicroSD tirando de él en línea recta.</li>
+                <li class="lang-es">Localiza la parte superior de la carcasa, justo donde se encuentra el logotipo grabado de ErikOS.</li>
+                <li class="lang-en">Locate the top of the casing, right where the engraved ErikOS logo is located.</li>
+                <li class="lang-ca">Localitza la part superior de la carcassa, just on es troba el logotip gravat d'ErikOS.</li>
+                
+                <li class="lang-es">Con una herramienta de apertura plana (o un cuchillo fino con extremo cuidado), haz palanca suavemente empezando <strong>desde el perfil trasero donde se ubican los puertos de conexión</strong>.</li>
+                <li class="lang-en">With a flat opening tool (or a thin knife with extreme care), pry gently starting <strong>from the rear profile where the connection ports are located</strong>.</li>
+                <li class="lang-ca">Amb una eina d'obertura plana (o un ganivet fi amb extremat compte), fes palanca suaument començant <strong>des del perfil posterior on s'ubiquen els ports de connexió</strong>.</li>
+                
+                <li class="lang-es">Desliza la herramienta lentamente por el perímetro hasta liberar los anclajes de compresión y retira la tapa superior.</li>
+                <li class="lang-en">Slide the tool slowly around the perimeter until you release the compression anchors and remove the top cover.</li>
+                <li class="lang-ca">Llisca l'eina lentament pel perímetre fins a alliberar els ancoratges de compressió i retira la tapa superior.</li>
+                
+                <li class="lang-es">Extrae la placa base en dirección vertical con extrema delicadeza, ya que se encuentra ajustada a la base térmica de la caja.</li>
+                <li class="lang-en">Extract the motherboard in a vertical direction with extreme delicacy, as it is fitted to the thermal base of the case.</li>
+                <li class="lang-ca">Extrau la placa base en direcció vertical amb extrema delicadesa, ja que es troba ajustada a la base tèrmica de la caixa.</li>
+                
+                <li class="lang-es">En la cara inferior de la placa base encontrarás el puerto de almacenamiento; extrae suavemente el módulo MicroSD tirando de él en línea recta.</li>
+                <li class="lang-en">On the bottom face of the motherboard, you will find the storage port; gently extract the MicroSD module by pulling it straight out.</li>
+                <li class="lang-ca">A la cara inferior de la placa base trobaràs el port d'emmagatzematge; extrau suaument el mòdul MicroSD tirant d'ell en línia recta.</li>
             </ol>
             <div class="share-container">
-                <a href="#abrir-mini" class="share-btn" onclick="copiarEnlace(this, 'abrir-mini')">🔗 Compartir sección</a>
+                <a href="#abrir-mini" class="share-btn" onclick="copiarEnlace(this, 'abrir-mini')">
+                    <span class="lang-es">🔗 Compartir sección</span>
+                    <span class="lang-en">🔗 Share section</span>
+                    <span class="lang-ca">🔗 Compartir secció</span>
+                </a>
             </div>
         </article>
 
         <article id="ayuda">
             <h2>
-                Centro de Soluciones Rápida
-                <span class="badge badge-all">Todas las versiones</span>
+                <span class="lang-es">Centro de Soluciones Rápida</span>
+                <span class="lang-en">Quick Solutions Center</span>
+                <span class="lang-ca">Centre de Solucions Ràpida</span>
+                <span class="badge badge-all">
+                    <span class="lang-es">Todas las versiones</span>
+                    <span class="lang-en">All versions</span>
+                    <span class="lang-ca">Totes les versions</span>
+                </span>
             </h2>
             
-            <h3 id="ayuda-dock">El ErikDock inferior no aparece</h3>
-            <p>Si el sistema arranca y el panel inferior no se despliega, el servicio de autoarranque podría haberse pausado. 
-            Abre el panel de control de ErikKit, dirígete a <strong>"Sesión e Inicio"</strong>. En la pestaña "Autoarranque", asegúrate de que el servicio de nuestro Dock esté habilitado para lanzarse con el sistema operativo.</p>
+            <h3 id="ayuda-dock">
+                <span class="lang-es">El ErikDock inferior no aparece</span>
+                <span class="lang-en">The bottom ErikDock does not appear</span>
+                <span class="lang-ca">L'ErikDock inferior no apareix</span>
+            </h3>
+            <p class="lang-es">Si el sistema arranca y el panel inferior no se despliega, el servicio de autoarranque podría haberse pausado. Abre el panel de control de ErikKit, dirígete a <strong>"Sesión e Inicio"</strong>. En la pestaña "Autoarranque", asegúrate de que el servicio de nuestro Dock esté habilitado para lanzarse con el sistema operativo.</p>
+            <p class="lang-en">If the system boots and the bottom panel does not deploy, the autostart service might have paused. Open the ErikKit control panel, go to <strong>"Session and Startup"</strong>. In the "Autostart" tab, make sure our Dock service is enabled to launch with the operating system.</p>
+            <p class="lang-ca">Si el sistema arranca i el tauler inferior no es desplega, el servei d'autoarrancada podria haver-se pausat. Obri el tauler de control d'ErikKit, dirigeix-te a <strong>"Sessió i Inici"</strong>. A la pestanya "Autoarrancada", assegura't que el servei del nostre Dock estiga habilitat per a llançar-se amb el sistema operatiu.</p>
             
-            <h3 id="ayuda-transparencia">El panel superior no tiene efecto de cristal (Transparencia)</h3>
-            <p>El motor de aceleración gráfica (Compositor) puede haberse puesto en modo ahorro de energía. Ve a los <strong>Ajustes de ErikKit > Efectos del Gestor de Ventanas > Pestaña Compositor</strong>. Verifica que la opción <em>"Activar composición de pantalla"</em> esté activada para restaurar el renderizado avanzado y los desenfoques.</p>
+            <h3 id="ayuda-transparencia">
+                <span class="lang-es">El panel superior no tiene efecto de cristal (Transparencia)</span>
+                <span class="lang-en">The top panel lacks the glass effect (Transparency)</span>
+                <span class="lang-ca">El tauler superior no té efecte de cristall (Transparència)</span>
+            </h3>
+            <p class="lang-es">El motor de aceleración gráfica (Compositor) puede haberse puesto en modo ahorro de energía. Ve a los <strong>Ajustes de ErikKit > Efectos del Gestor de Ventanas > Pestaña Compositor</strong>. Verifica que la opción <em>"Activar composición de pantalla"</em> esté activada para restaurar el renderizado avanzado y los desenfoques.</p>
+            <p class="lang-en">The graphical acceleration engine (Compositor) may have entered power-saving mode. Go to <strong>ErikKit Settings > Window Manager Effects > Compositor Tab</strong>. Verify that the <em>"Enable display compositing"</em> option is checked to restore advanced rendering and blurs.</p>
+            <p class="lang-ca">El motor d'acceleració gràfica (Compositor) pot haver-se posat en mode estalvi d'energia. Ves als <strong>Ajustaments d'ErikKit > Efectes del Gestor de Finestres > Pestanya Compositor</strong>. Verifica que l'opció <em>"Activar composició de pantalla"</em> estiga activada per a restaurar el renderitzat avançat i els desenfocaments.</p>
             
-            <h3 id="ayuda-wifi">El ErikMini no tiene conexión a internet</h3>
-            <p>Si no inyectaste los datos Wi-Fi durante el flasheo de la imagen, el sistema de red de ErikOS se mantendrá en espera. Puedes forzar la conexión abriendo la terminal y ejecutando nuestra herramienta de diagnóstico base: escribe <code>sudo raspi-config</code>, navega hasta <em>System Options > Wireless LAN</em> y vincula tu red manualmente.</p>
+            <h3 id="ayuda-wifi">
+                <span class="lang-es">El ErikMini no tiene conexión a internet</span>
+                <span class="lang-en">The ErikMini has no internet connection</span>
+                <span class="lang-ca">L'ErikMini no té connexió a internet</span>
+            </h3>
+            <p class="lang-es">Si no inyectaste los datos Wi-Fi durante el flasheo de la imagen, el sistema de red de ErikOS se mantendrá en espera. Puedes forzar la conexión abriendo la terminal y ejecutando nuestra herramienta de diagnóstico base: escribe <code>sudo raspi-config</code>, navega hasta <em>System Options > Wireless LAN</em> y vincula tu red manualmente.</p>
+            <p class="lang-en">If you did not inject the Wi-Fi data during the image flashing, the ErikOS network system will remain on standby. You can force the connection by opening the terminal and running our base diagnostic tool: type <code>sudo raspi-config</code>, navigate to <em>System Options > Wireless LAN</em> and link your network manually.</p>
+            <p class="lang-ca">Si no vas injectar les dades Wi-Fi durant el flasseig de la imatge, el sistema de xarxa d'ErikOS es mantindrà en espera. Pots forçar la connexió obrint la terminal i executant la nostra eina de diagnòstic base: escriu <code>sudo raspi-config</code>, navega fins a <em>System Options > Wireless LAN</em> i vincula la teua xarxa manualment.</p>
 
             <div class="share-container">
-                <a href="#ayuda" class="share-btn" onclick="copiarEnlace(this, 'ayuda')">🔗 Compartir sección</a>
+                <a href="#ayuda" class="share-btn" onclick="copiarEnlace(this, 'ayuda')">
+                    <span class="lang-es">🔗 Compartir sección</span>
+                    <span class="lang-en">🔗 Share section</span>
+                    <span class="lang-ca">🔗 Compartir secció</span>
+                </a>
             </div>
         </article>
 
     </main>
 
     <script>
+        // --- LÓGICA DE IDIOMAS ---
+        function cambiarIdioma(lang) {
+            document.body.setAttribute('data-lang', lang);
+            localStorage.setItem('erikos_lang', lang);
+            document.getElementById('lang-select').value = lang;
+        }
+
+        window.onload = function() {
+            let savedLang = localStorage.getItem('erikos_lang');
+            if (!savedLang) {
+                const userLang = navigator.language || navigator.userLanguage;
+                if (userLang.startsWith('en')) savedLang = 'en';
+                else if (userLang.startsWith('ca') || userLang.startsWith('va')) savedLang = 'ca'; 
+                else savedLang = 'es'; 
+            }
+            cambiarIdioma(savedLang);
+        };
+
+        // --- LÓGICA DE COPIAR ENLACE ---
         function copiarEnlace(elemento, idSeccion) {
             event.preventDefault(); 
             const urlCompleta = window.location.href.split('#')[0] + '#' + idSeccion;
             
             navigator.clipboard.writeText(urlCompleta).then(() => {
-                const textoOriginal = elemento.innerText;
-                elemento.innerText = "✅ ¡Enlace copiado al portapapeles!";
+                const textoOriginal = elemento.innerHTML; // Guardamos todo el HTML interno (los 3 spans)
+                const currentLang = document.body.getAttribute('data-lang') || 'es';
+                
+                // Mensaje de éxito según el idioma
+                let successMsg = "✅ ¡Enlace copiado al portapapeles!";
+                if(currentLang === 'en') successMsg = "✅ Link copied to clipboard!";
+                if(currentLang === 'ca') successMsg = "✅ Enllaç copiat al porta-retalls!";
+                
+                elemento.innerText = successMsg;
                 elemento.style.backgroundColor = "#e8f5e9";
                 elemento.style.borderColor = "#4caf50";
                 elemento.style.color = "#2e7d32";
                 
                 setTimeout(() => {
-                    elemento.innerText = textoOriginal;
+                    elemento.innerHTML = textoOriginal; // Restauramos los 3 spans
                     elemento.style.backgroundColor = "transparent";
                     elemento.style.borderColor = "var(--accent)";
                     elemento.style.color = "var(--accent)";
                 }, 3000);
             }).catch(err => {
                 console.error('Error al copiar: ', err);
-                alert("No se pudo copiar el enlace. Tu navegador puede estar bloqueando esta función.");
+                const currentLang = document.body.getAttribute('data-lang') || 'es';
+                if(currentLang === 'en') alert("Could not copy link. Your browser may be blocking this feature.");
+                else if(currentLang === 'ca') alert("No s'ha pogut copiar l'enllaç. El teu navegador pot estar bloquejant aquesta funció.");
+                else alert("No se pudo copiar el enlace. Tu navegador puede estar bloqueando esta función.");
             });
         }
     </script>
