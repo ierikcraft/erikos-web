@@ -1,0 +1,10 @@
+{
+  "name": "ErikOS 2.0",
+  "version": "2.0.0",
+  "version_code": 2,
+  "icon_url": "https://os.erikhub.com/update/android/icon.png",
+  "apk_url": "https://os.erikhub.com/update/android/ErikOS.apk",
+  "size": "15.4 MB",
+  "description": "ErikOS 2.0 incluye una pantalla de inicio rediseñada, mejoras en la Dynamic Island, soporte para gestos y optimización general del rendimiento del sistema.",
+  "is_available": false
+}
